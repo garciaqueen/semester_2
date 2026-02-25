@@ -17,16 +17,15 @@ public class Point {
     }
 
     public void tranlate(double dx, double dy) {
-        dx++;
-        dy++;
+        this.x = x+dx;
+        this.y = y+dy;
     }
 
-    public void translated(double dx, double dy) {
+    public Point translated(double dx, double dy) {
         Point p2 = new Point();
-        p2.x = 1.0;
-        p2.y = 2.0;
-        p2.x += dx;
-        p2.y += dy;
+        p2.tranlate(dx, dy);
+        return p2;
+
     }
 
 }
