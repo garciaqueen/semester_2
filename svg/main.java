@@ -1,5 +1,6 @@
 public class Main {
-  static void myMethod() {
+  static void main() {
     System.out.println("Hello World!");
   }
 }
+
