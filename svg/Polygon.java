@@ -8,7 +8,20 @@ public class Polygon {
         for (int i = 0; i < points.length; i++) {
             this.points[i] = new Point(points[i]);
         }
+
     }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Polygon(Polygon other) {
+        this.points = new Point[other.points.length];
+        for (int i = 0; i < other.points.length; i++) {
+            this.points[i] = new Point(other.points[i]);
+        }
+    }
+//
     @Override
     public String toString() {
         StringBuilder st = new StringBuilder("Points array: ");
