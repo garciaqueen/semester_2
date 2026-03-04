@@ -14,4 +14,15 @@ public class SvgScene {
             index = 0;
         }
     }
+    public String toSvg() {
+        StringBuilder st = new StringBuilder();
+        for (Polygon p: polygons) {
+            if (p != null) {
+                st.append(p.toSvg());
+                st.append("\n");
+
+            }
+        }
+        return st.toString();
+    }
 }
