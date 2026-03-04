@@ -41,19 +41,13 @@ public class SvgScene {
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"")
-                .append(maxX)
-                .append("\" height=\"")
-                .append(maxY)
-                .append("\">\n");
 
-        sb.append(this.toSvg());
-
-        sb.append("</svg>");
 
         try (FileWriter fw = new FileWriter(filePath)) {
-            fw.write(sb.toString());
+            for (Polygon p: polygons) {
+                fw.write();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
