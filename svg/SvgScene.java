@@ -3,7 +3,7 @@ import java.io.IOException;
 
 public class SvgScene {
 
-    private Polygon[] polygons;
+    private final Polygon[] polygons;
     private int index;
 
     public SvgScene() {
