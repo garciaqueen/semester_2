@@ -8,8 +8,8 @@ public class Polygon {
         for (int i = 0; i < points.length; i++) {
             this.points[i] = new Point(points[i]);
         }
-
     }
+
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -21,11 +21,11 @@ public class Polygon {
             this.points[i] = new Point(other.points[i]);
         }
     }
-//
+
     @Override
     public String toString() {
         StringBuilder st = new StringBuilder("Points array: ");
-        for (Point p: points) {
+        for (Point p : points) {
             st.append(p.toString()).append("\n");
         }
         return st.toString();
@@ -33,12 +33,16 @@ public class Polygon {
 
     public String toSvg() {
         StringBuilder st = new StringBuilder();
+
         st.append("""
                 <svg width="300" height="300">
-                  <polygon cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow""");
-        for (Point p: points) {
+                <polygon points="
+                """);
+
+        for (Point p : points) {
             st.append(p.getX()).append(",").append(p.getY()).append(" ");
         }
+
         st.append("""
                 " style="fill:yellow;stroke:red;stroke-width:2"/>
                 </svg>
