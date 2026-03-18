@@ -37,14 +37,21 @@ public class SvgScene {
 
         try (FileWriter fw = new FileWriter(filePath)) {
 
+            // OPEN SVG
+            fw.write("<svg width=\"300\" height=\"300\" xmlns=\"http://www.w3.org/2000/svg\">\n");
+
+            // WRITE POLYGONS
             for (Polygon p : polygons) {
                 if (p != null) {
                     fw.write(p.toSvg());
                 }
             }
 
+            // CLOSE SVG
+            fw.write("</svg>");
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error while saving SVG: " + e.getMessage());
         }
     }
 }

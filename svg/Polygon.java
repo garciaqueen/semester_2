@@ -1,15 +1,16 @@
 public class Polygon {
 
     private final Point[] points;
+    private Style style;
 
-    public Polygon(Point[] points) {
+    public Polygon(Point[] points, Style style) {
         this.points = new Point[points.length];
-
+        this.style = style;
         for (int i = 0; i < points.length; i++) {
             this.points[i] = new Point(points[i]);
         }
     }
-
+    
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -21,7 +22,14 @@ public class Polygon {
             this.points[i] = new Point(other.points[i]);
         }
     }
-
+    // record BoundingBox(double x_l, double y_l, double width, double height) {}
+    
+    // public BoundingBox boundingBox() {
+    //     double minX = points[0].getX();
+    //     double minY = points[0].getY();
+    //     double maxX = points[0].getX();
+    //     double maxY = points[0].getY();
+    // }
     @Override
     public String toString() {
         StringBuilder st = new StringBuilder("Points array: ");
@@ -35,18 +43,15 @@ public class Polygon {
         StringBuilder st = new StringBuilder();
 
         st.append("""
-                <svg width="300" height="300">
                 <polygon points="
                 """);
 
         for (Point p : points) {
             st.append(p.getX()).append(",").append(p.getY()).append(" ");
         }
-
-        st.append("""
-                " style="fill:yellow;stroke:red;stroke-width:2"/>
-                </svg>
-                """);
+        st.append("\"");
+        st.append(this.style.toSvg());
+        st.append("></polygon>");
 
         return st.toString();
     }
