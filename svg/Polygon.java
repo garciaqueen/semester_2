@@ -55,4 +55,12 @@ public class Polygon {
 
         return st.toString();
     }
+
+    public static Polygon square(Segment seg, Style style) {
+        Segment seg2 = seg.perpendicular();
+        Point[] points = {seg.p1, seg2.p1, seg.p2, seg2.p2};
+        
+        Polygon pol = new Polygon(points, style);
+        return pol;
+    }
 }

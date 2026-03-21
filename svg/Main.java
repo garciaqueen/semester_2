@@ -18,31 +18,21 @@ public class Main {
 
   public static void main(String[] args) {
 
-    Point[] pts1 = new Point[3];
-    pts1[0] = new Point(10, 10);
-    pts1[1] = new Point(100, 10);
-    pts1[2] = new Point(50, 80);
+    // Point[] pts1 = new Point[3];
+    Point pts1 = new Point(50, 70);
+    Point pts2 = new Point(80, 60);
+    // pts1[2] = new Point(50, 80);
 
     Style style = new Style("blue", "black", 1);
 
-    Polygon poly1 = new Polygon(pts1, style);
-
-
-
-    // create second polygon
-    Point[] pts2 = new Point[4];
-    pts2[0] = new Point(120, 50);
-    pts2[1] = new Point(200, 50);
-    pts2[2] = new Point(200, 120);
-    pts2[3] = new Point(120, 120);
-
-    Polygon poly2 = new Polygon(pts2, style);
-
     // create scene
     SvgScene scene = new SvgScene();
-
+    Segment seg1 = new Segment();
+    seg1.setP1(pts1);
+    seg1.setP2(pts2);
+    Polygon poly1 = Polygon.square(seg1, style);
     scene.addPolygon(poly1);
-    scene.addPolygon(poly2);
+    // scene.addPolygon(poly2);
 
     scene.save("scene.svg");
 
