@@ -2,20 +2,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SvgScene {
-
-    private final Polygon[] polygons;
+    private final Shape[] shapes;
     private int index;
 
     public SvgScene() {
-        polygons = new Polygon[3];
+        shapes = new Shape[3];
         index = 0;
     }
 
-    public void addPolygon(Polygon polygon) {
-        this.polygons[index] = polygon;
+    public void addShape(Shape shape) {
+        shapes[index] = shape;
         index++;
 
-        if (index == polygons.length) {
+        if (index == shapes.length) {
             index = 0;
         }
     }
@@ -23,9 +22,9 @@ public class SvgScene {
     public String toSvg() {
         StringBuilder st = new StringBuilder();
 
-        for (Polygon p : polygons) {
-            if (p != null) {
-                st.append(p.toSvg());
+        for (Shape s : this.shapes) {
+            if (s != null) {
+                st.append(s.toSvg());
                 st.append("\n");
             }
         }
@@ -41,9 +40,9 @@ public class SvgScene {
             fw.write("<svg width=\"300\" height=\"300\" xmlns=\"http://www.w3.org/2000/svg\">\n");
 
             // WRITE POLYGONS
-            for (Polygon p : polygons) {
-                if (p != null) {
-                    fw.write(p.toSvg());
+            for (Shape s : shapes) {
+                if (s != null) {
+                    fw.write(s.toSvg());
                 }
             }
 
