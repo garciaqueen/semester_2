@@ -44,7 +44,6 @@ public class Main {
     scene.addPolygon(poly1);
     scene.addPolygon(poly2);
 
-    // save SVG file
     scene.save("scene.svg");
 
     System.out.println("SVG file saved!");
