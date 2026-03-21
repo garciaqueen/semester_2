@@ -1,11 +1,11 @@
-public class Polygon {
+public class Polygon extends Shape {
 
     private final Point[] points;
-    private Style style;
 
     public Polygon(Point[] points, Style style) {
+        super(style); // 🔥 ось це викликає Shape(style)
+
         this.points = new Point[points.length];
-        this.style = style;
         for (int i = 0; i < points.length; i++) {
             this.points[i] = new Point(points[i]);
         }
@@ -16,12 +16,12 @@ public class Polygon {
         return super.clone();
     }
 
-    public Polygon(Polygon other) {
-        this.points = new Point[other.points.length];
-        for (int i = 0; i < other.points.length; i++) {
-            this.points[i] = new Point(other.points[i]);
-        }
-    }
+    // public Polygon(Polygon other) {
+    //     this.points = new Point[other.points.length];
+    //     for (int i = 0; i < other.points.length; i++) {
+    //         this.points[i] = new Point(other.points[i]);
+    //     }
+    // }
     // record BoundingBox(double x_l, double y_l, double width, double height) {}
     
     // public BoundingBox boundingBox() {
@@ -38,7 +38,7 @@ public class Polygon {
         }
         return st.toString();
     }
-
+    @Override
     public String toSvg() {
         StringBuilder st = new StringBuilder();
 
@@ -50,7 +50,7 @@ public class Polygon {
             st.append(p.getX()).append(",").append(p.getY()).append(" ");
         }
         st.append("\"");
-        st.append(this.style.toSvg());
+        st.append(style.toSvg());
         st.append("></polygon>");
 
         return st.toString();
