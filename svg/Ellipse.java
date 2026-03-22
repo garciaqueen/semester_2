@@ -1,33 +1,25 @@
-public class Ellipse extends Shape {
-    private final Point p;
-    private final double rx;
-    private final double ry;
+import java.util.Locale;
 
-    public Ellipse(Point center, double rx, double ry, Style style) {
-        super(style);
+public class Ellipse implements Shape{
+    private Vec2 center;
+    private double rx, ry;
 
-        this.p = new Point(center);
+    public Ellipse(Vec2 center, double rx, double ry) {
+        this.center = center;
         this.rx = rx;
         this.ry = ry;
     }
 
+    @Override
+    public BoundingBox boundingBox() {
+        return new BoundingBox(center.x() - rx, center.y() - ry, rx * 2, ry * 2);
+    }
 
     @Override
     public String toSvg() {
-        StringBuilder st = new StringBuilder();
-
-        st.append("<ellipse cx=\"")
-        .append(p.getX())
-        .append("\" cy=\"")
-        .append(p.getY())
-        .append("\" rx=\"")
-        .append(this.rx)
-        .append("\" ry=\"")
-        .append(this.ry)
-        .append("\" ")
-        .append(style.toSvg())
-        .append("/>");
-
-        return st.toString();
+        return String.format(Locale.ENGLISH,"<ellipse rx=\"%f\" ry=\"%f\" cx=\"%f\" cy=\"%f\"/>",
+                rx,ry,center.x(),center.y());
     }
+
+
 }

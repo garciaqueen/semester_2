@@ -1,66 +1,36 @@
-public class Polygon extends Shape {
+import java.util.Locale;
 
-    private final Point[] points;
-
-    public Polygon(Point[] points, Style style) {
-        super(style); // 🔥 ось це викликає Shape(style)
-
-        this.points = new Point[points.length];
-        for (int i = 0; i < points.length; i++) {
-            this.points[i] = new Point(points[i]);
+public class Polygon implements Shape{
+    private Vec2[] points;
+    public Polygon(Vec2[] points) {
+        this.points = new Vec2[points.length];
+        for(int i =0; i < points.length; i++)
+        {
+            this.points[i] = new Vec2(points[i]);
         }
     }
-    
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
-    // public Polygon(Polygon other) {
-    //     this.points = new Point[other.points.length];
-    //     for (int i = 0; i < other.points.length; i++) {
-    //         this.points[i] = new Point(other.points[i]);
-    //     }
-    // }
-    // record BoundingBox(double x_l, double y_l, double width, double height) {}
-    
-    // public BoundingBox boundingBox() {
-    //     double minX = points[0].getX();
-    //     double minY = points[0].getY();
-    //     double maxX = points[0].getX();
-    //     double maxY = points[0].getY();
-    // }
     @Override
-    public String toString() {
-        StringBuilder st = new StringBuilder("Points array: ");
-        for (Point p : points) {
-            st.append(p.toString()).append("\n");
+    public BoundingBox boundingBox() {
+        double xMin = this.points[0].x();
+        double xMax = this.points[0].x();
+        double yMin = this.points[0].y();
+        double yMax = this.points[0].y();
+
+        for (int i = 1; i < points.length; i++) {
+            xMin = Math.min(xMin, points[i].x());
+            xMax = Math.max(xMax, points[i].x());
+            yMin = Math.min(yMin, points[i].y());
+            yMax = Math.max(yMax, points[i].y());
         }
-        return st.toString();
+        return new BoundingBox(xMin, yMin, xMax - xMin, yMax - yMin);
     }
-    @Override
-    public String toSvg() {
-        StringBuilder st = new StringBuilder();
 
-        st.append("""
-                <polygon points="
-                """);
-
-        for (Point p : points) {
-            st.append(p.getX()).append(",").append(p.getY()).append(" ");
+    public String toSvg()    {
+        String pointsString = "";
+        for(Vec2 point : points) {
+            pointsString += point.x() + "," + point.y() + " ";
         }
-        st.append("\"");
-        st.append(style.toSvg());
-        st.append("></polygon>");
-
-        return st.toString();
-    }
-
-    public static Polygon square(Segment seg, Style style) {
-        Segment seg2 = seg.perpendicular();
-        Point[] points = {seg.p1, seg2.p1, seg.p2, seg2.p2};
-        
-        Polygon pol = new Polygon(points, style);
-        return pol;
+        return String.format(Locale.ENGLISH, "<polygon points=\"%s\" />", pointsString);
     }
 }
