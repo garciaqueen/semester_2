@@ -28,13 +28,13 @@ public class DeathCauseStatistic {
 
     public static DeathCauseStatistic fromCsvLine(String line) {
         //A02.1          ,5,-,-,-,-,-,-,-,-,-,-,-,-,1,2,-,1,1,-,-,-
-        String[] parts = line.split(";");
+        String[] parts = line.split(",");
         String ticd10 = parts[0].trim();
         int num = parts.length - 1;
         int[] cass = new int[num];
 
         for (int i = 1; i < parts.length-1; i++) {
-            if (parts[i] == "-") {
+            if (parts[i].equals("-")) {
                 cass[i] = 0;
             } else {
                 cass[i] = Integer.parseInt(parts[i].trim());
