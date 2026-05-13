@@ -1,11 +1,12 @@
 import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class DeathCauseStatisticList {
 
-    private List<DeathCauseStatistic> statistics;
+    private List<DeathCauseStatistic> statistics = new ArrayList<>();
 
     public void repopulate(String path) throws IOException {
         BufferedReader bf = new BufferedReader(new FileReader(path));
