@@ -1,27 +1,24 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Land extends Polygon {
+
+    private List<City> cities = new ArrayList<>();
+
     public Land(List<Point> points) {
         super(points);
     }
 
-    private List<City> cities;
-
     public boolean isLand(Point p) {
-        // przykładowa implementacja (do zastąpienia własną logiką)
-        return true;
+        return inside(p);
     }
 
     private void updatePortStatus(City city) {
 
-        for (Point p : Arrays.asList(
-                city.getPoints().get(0),
-                city.getPoints().get(1),
-                city.getPoints().get(2),
-                city.getPoints().get(3)
-        )) {
-            if (!isLand(p)) {
+        for (Point p : city.getPoints()) {
+
+            if (!inside(p)) {
                 city.setPort(true);
                 return;
             }
@@ -32,14 +29,20 @@ public class Land extends Polygon {
 
     public void addCity(City city) {
 
-        if (!isLand(city.center)) {
+        if (!inside(city.center)) {
             throw new RuntimeException(city.getName());
         }
 
         updatePortStatus(city);
         cities.add(city);
     }
+
+    @Override
+    public String toString() {
+
+        return cities.stream()
+                .map(City::toString)
+                .collect(Collectors.joining(", "));
+    }
 }
 
-
-}
