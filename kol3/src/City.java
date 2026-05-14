@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 public class City extends Polygon {
-    public City(List<Point> points) {
-        super(points);
-    }
 
     public final Point center;
 

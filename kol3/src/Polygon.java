@@ -53,11 +53,7 @@ import java.util.*;public class Polygon
             }
         }
 
-        if (counter % 2 != 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return counter % 2 != 0;
     }
 
 
